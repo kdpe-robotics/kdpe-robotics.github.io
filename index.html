@@ -61,59 +61,74 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+
               <!-- Video Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
+
               <!-- Code Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://github.com/kdpe-robotics/kdpe"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code</span>
+                  <span>KDPE Code</span>
                   </a>
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://github.com/kdpe-robotics/trajectory-visualizer"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="far fa-images"></i>
+                      <i class="fab fa-github"></i>
                   </span>
-                  <span>Data</span>
+                  <span>Visualizier Code</span>
                   </a>
+              </span>
             </div>
 
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- Learning robot policies that capture multimodality in the training data has been a long-standing
+          open challenge for behavior cloning. Recent approaches tackle the problem by modeling
+          the conditional action distribution with generative models. 
+          One of these approaches is Diffusion Policy, which relies on a diffusion model to denoise 
+          random points into robot action trajectories. While achieving state-of-the-art performance, 
+          it has two main drawbacks that may lead the robot out of the data distribution during policy execution. 
+          First, the stochasticity of the denoising process can highly impact on the quality of generated 
+          trajectory of actions. Second, being a supervised learning approach, it can learn data outliers 
+          from the dataset used for training.  
+          Recent work focuses on mitigating these limitations by combining Diffusion Policy either 
+          with large-scale training or with classical behavior cloning algorithms.  -->
+            <p>
+            We propose KDPE, a Kernel Density Estimation-based strategy that filters out potentially 
+            harmful trajectories output of Diffusion Policy while keeping a low test-time computational overhead.
+            For Kernel Density Estimation, we propose a manifold-aware kernel to model a probability density 
+            function for actions composed of end-effector Cartesian position, orientation, and gripper state.
+            </p>
+
+            <p>
+            KDPE overall achieves better performance than Diffusion Policy on simulated single-arm RoboMimic 
+            and MimicGen tasks, and on three real robot experiments:
+            <i>PickPlush</i>, a tabletop grasping task, 
+            <i>CubeSort</i>, a multimodal pick and place task, and 
+            <i>CoffeeMaking</i>, a task that requires long-horizon capabilities and precise execution.
+            </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
   </div>
 </section>
 
@@ -126,7 +141,7 @@
          href="">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/kdpe-robotics/kdpe-robotics.github.io" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
