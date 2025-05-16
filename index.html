@@ -18,6 +18,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -78,7 +79,6 @@
                   </a>
               </span>
             </div>
-
           </div>
         </div>
       </div>
@@ -90,9 +90,10 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video poster="static/images/thumbnail.png" id="tree" controls loop height="100%">
+      <video poster="static/images/thumbnail.png" id="tree" controls autoplay muted height="100%">
         <!-- Your video here -->
         <source src="https://github.com/kdpe-robotics/kdpe-robotics.github.io/releases/download/corl2025/KDPE_CoRL.mp4" type="video/mp4">
+        <track src="static/captions/captions.vtt" kind="captions" srclang="en" label="English" default>
       </video>
     </div>
   </div>
@@ -106,29 +107,18 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <!-- Learning robot policies that capture multimodality in the training data has been a long-standing
-          open challenge for behavior cloning. Recent approaches tackle the problem by modeling
-          the conditional action distribution with generative models. 
-          One of these approaches is Diffusion Policy, which relies on a diffusion model to denoise 
-          random points into robot action trajectories. While achieving state-of-the-art performance, 
-          it has two main drawbacks that may lead the robot out of the data distribution during policy execution. 
-          First, the stochasticity of the denoising process can highly impact on the quality of generated 
-          trajectory of actions. Second, being a supervised learning approach, it can learn data outliers 
-          from the dataset used for training.  
-          Recent work focuses on mitigating these limitations by combining Diffusion Policy either 
-          with large-scale training or with classical behavior cloning algorithms.  -->
             <p>
-            We propose KDPE, a Kernel Density Estimation-based strategy that filters out potentially 
+            We propose KDPE, a Kernel Density Estimation-based strategy that filters out potentially
             harmful trajectories output of Diffusion Policy while keeping a low test-time computational overhead.
-            For Kernel Density Estimation, we propose a manifold-aware kernel to model a probability density 
+            For Kernel Density Estimation, we propose a manifold-aware kernel to model a probability density
             function for actions composed of end-effector Cartesian position, orientation, and gripper state.
             </p>
 
             <p>
-            KDPE overall achieves better performance than Diffusion Policy on simulated single-arm RoboMimic 
+            KDPE overall achieves better performance than Diffusion Policy on simulated single-arm RoboMimic
             and MimicGen tasks, and on three real robot experiments:
-            <i>PickPlush</i>, a tabletop grasping task, 
-            <i>CubeSort</i>, a multimodal pick and place task, and 
+            <i>PickPlush</i>, a tabletop grasping task,
+            <i>CubeSort</i>, a multimodal pick and place task, and
             <i>CoffeeMaking</i>, a task that requires long-horizon capabilities and precise execution.
             </p>
         </div>
@@ -137,6 +127,167 @@
     <!--/ Abstract. -->
   </div>
 </section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h1 class="title is-3">Real-world Experiments</h1>
+        <h1 class="title is-4">Benchmark</h1>
+
+        <div class="video-grid-container">
+            <!-- KDPE Row -->
+            <div class="video-row" id="kdpe-row">
+                <div class="row-header">
+                    <h2>KDPE</h2>
+                    <select class="video-filter" id="kdpe-filter" onchange="handleVideoChange('kdpe', this.value)">
+                        <option value="success" selected>Success</option>
+                        <option value="failure">Failure</option>
+                    </select>
+                </div>
+                <div class="videos-wrapper" id="kdpe-videos">
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>PickPlush</i> <br> (success rate:  <b>96%</b>)</p>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>PickSponge</i> <br> (success rate:  <b>90%</b>)</p>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>CubeSort</i> <br> (success rate:  <b>44%</b>)</p>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>CoffeeMaking</i> <br> (success rate:  <b>70%</b>)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baseline Row -->
+            <div class="video-row" id="baseline-row">
+                <div class="row-header">
+                    <h2>Baseline</h2>
+                    <select class="video-filter" id="baseline-filter" onchange="handleVideoChange('baseline', this.value)">
+                        <option value="success">Success</option>
+                        <option value="failure" selected>Failure</option>
+                    </select>
+                </div>
+                <div class="videos-wrapper" id="baseline-videos">
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>PickPlush</i> <br> (success rate:  90%)</p>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>PickSponge</i> <br> (success rate:  88%)</p>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>CubeSort</i> <br> (success rate:  41%)</p>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop preload="metadata">
+                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        </video>
+                        <p class="video-caption"><i>CoffeeMaking</i> <br> (success rate:  60%)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+    // Video sources - captions are static in HTML
+    const videoData = {
+        kdpe: {
+            success: [
+                "static/videos/kdpe/pp_success.mp4",
+                "static/videos/kdpe/ps_success.mp4",
+                "static/videos/kdpe/cs_success.mp4",
+                "static/videos/kdpe/cm_success.mp4"
+            ],
+            failure: [
+                "static/videos/kdpe/pp_failure.mp4",
+                "static/videos/kdpe/ps_failure.mp4",
+                "static/videos/kdpe/cs_failure.mp4",
+                "static/videos/kdpe/cm_failure.mp4"
+            ]
+        },
+        baseline: {
+            success: [
+                "static/videos/baseline/pp_success.mp4",
+                "static/videos/baseline/ps_success.mp4",
+                "static/videos/baseline/cs_success.mp4",
+                "static/videos/baseline/cm_success.mp4"
+            ],
+            failure: [
+                "static/videos/baseline/pp_failure.mp4",
+                "static/videos/baseline/ps_failure.mp4",
+                "static/videos/baseline/cs_failure.mp4",
+                "static/videos/baseline/cm_failure.mp4"
+            ]
+        }
+    };
+
+    function handleVideoChange(rowType, filterValue) {
+        const videosContainer = document.getElementById(`${rowType}-videos`);
+        // Query for video elements directly within the specific row's video items
+        const videoElements = videosContainer.querySelectorAll('.video-item video');
+        const newSources = videoData[rowType][filterValue];
+
+        videoElements.forEach((videoElement, index) => {
+            if (newSources && newSources[index]) {
+                const sourceTag = videoElement.querySelector('source');
+                if (sourceTag) {
+                    sourceTag.setAttribute('src', newSources[index]);
+                    videoElement.load(); // Reload the video with the new source
+                    // videoElement.play(); // Autoplay attribute should handle playing after load if browser policies allow
+                } else {
+                    console.warn(`Video element at index ${index} in row ${rowType} is missing a <source> tag.`);
+                }
+            } else {
+                 console.warn(`No new source defined for video at index ${index} in ${rowType}-${filterValue}`);
+            }
+        });
+    }
+
+    // Initialize videos on page load
+    // Ensure the DOM is ready before trying to access elements,
+    // though placing the script at the end of body usually suffices.
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize KDPE videos based on its dropdown's default selected value
+        const kdpeFilter = document.getElementById('kdpe-filter');
+        if (kdpeFilter) {
+            handleVideoChange('kdpe', kdpeFilter.value);
+        }
+
+        // Initialize Baseline videos based on its dropdown's default selected value
+        const baselineFilter = document.getElementById('baseline-filter');
+        if (baselineFilter) {
+            handleVideoChange('baseline', baselineFilter.value);
+        }
+    });
+</script>
 
 
 

@@ -155,3 +155,130 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+
+.video-grid-container {
+    display: flex;
+    /* flex-direction: column; /* CHANGED from column */
+    flex-direction: row;    /* NOW side-by-side */
+    gap: 30px; /* Space between KDPE and Baseline columns */
+}
+
+.video-row {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex: 1; /* ADDED: Makes each row (now column) take up equal space */
+    display: flex; /* ADDED: To allow internal elements to flex correctly, e.g., videos-wrapper grow */
+    flex-direction: column; /* ADDED: Stack header and videos-wrapper vertically inside the row */
+}
+
+.row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.row-header h2 {
+    margin: 0;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.video-filter {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 0.9em;
+}
+
+.videos-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Default to 2 videos per sub-row to fit side-by-side better */
+    gap: 20px; /* Space between videos */
+    flex-grow: 1; /* ADDED: Allows the wrapper to grow if content is less than available space */
+}
+
+.video-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-item video {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 180px; /* Or a fixed height as needed */
+    border-radius: 4px;
+    background-color: #000; /* Fallback background */
+    margin-bottom: 8px;
+}
+
+.video-caption {
+    margin-top: auto; /* Pushes caption to the bottom if video element varies slightly in displayed height */
+    padding-top: 8px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Responsive adjustments */
+
+/* On larger screens, if you still want 4 videos per row *within* each column,
+   you might need a higher breakpoint or adjust the default .videos-wrapper */
+@media (min-width: 1400px) { /* Example: for very wide screens */
+    .videos-wrapper {
+        grid-template-columns: repeat(2, 1fr); /* Or even 3 if space allows and desired */
+    }
+}
+
+
+@media (max-width: 1200px) {
+    /* .videos-wrapper already handles its own responsiveness for items inside */
+    /* Kept the original rule, but it might be too dense if side-by-side columns are still active */
+    .videos-wrapper {
+         /* If the two main columns are still side-by-side, 2 videos per sub-row might be too many.
+           Consider 1 video per sub-row here, or stack the main columns earlier. */
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* NEW Media Query: When to stack the KDPE and Baseline columns */
+@media (max-width: 992px) { /* Adjust this breakpoint as needed */
+    .video-grid-container {
+        flex-direction: column; /* Stack KDPE and Baseline rows again */
+    }
+    .videos-wrapper {
+        /* When stacked, we can go back to 2 videos per row if space allows */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .video-grid-container {
+        flex-direction: column; /* Ensures stacking if not already done by 992px breakpoint */
+    }
+    .videos-wrapper {
+        grid-template-columns: 1fr; /* 1 video per row on mobile */
+    }
+    .row-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .row-header h2 {
+        margin-bottom: 10px;
+    }
+    .video-filter {
+        width: 100%;
+        max-width: 200px; /* Or full width if preferred */
+    }
+}
