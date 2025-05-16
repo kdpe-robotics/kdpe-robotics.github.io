@@ -20,6 +20,32 @@
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.png">
 
+  <style>
+    /* Style for the "Similar Initialization" video section */
+    .similar-init-stacked .videos-wrapper {
+        display: flex; /* Establishes a flex container */
+        flex-direction: column; /* Stacks children vertically */
+        align-items: center; /* Centers the stack of video items horizontally */
+    }
+
+    .similar-init-stacked .video-item {
+        width: 100%; /* Video item tries to be as wide as its parent column allows */
+        max-width: 720px; /* Caps the width of the video item. Adjust as needed. */
+        margin-bottom: 1.5rem; /* Space between stacked videos */
+    }
+
+    .similar-init-stacked .video-item:last-child {
+        margin-bottom: 0; /* No bottom margin for the last video in a stack */
+    }
+
+    .similar-init-stacked .video-item video {
+        width: 100%; /* Video element fills its .video-item container */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Avoids potential extra space below the video */
+        border-radius: 8px; /* Optional: consistent styling */
+    }
+  </style>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
@@ -131,11 +157,10 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+    <div class="columns is-centered">
+      <div class="column is-centered">
         <h1 class="title is-3">Real-world Experiments</h1>
         <h1 class="title is-4">Benchmark</h1>
-
         <div class="video-grid-container">
             <!-- KDPE Row -->
             <div class="video-row" id="kdpe-row">
@@ -148,26 +173,26 @@
                 </div>
                 <div class="videos-wrapper" id="kdpe-videos">
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>PickPlush</i> <br> (success rate:  <b>96%</b>)</p>
                     </div>
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>PickSponge</i> <br> (success rate:  <b>90%</b>)</p>
                     </div>
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>CubeSort</i> <br> (success rate:  <b>44%</b>)</p>
                     </div>
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>CoffeeMaking</i> <br> (success rate:  <b>70%</b>)</p>
                     </div>
@@ -185,28 +210,71 @@
                 </div>
                 <div class="videos-wrapper" id="baseline-videos">
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>PickPlush</i> <br> (success rate:  90%)</p>
                     </div>
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>PickSponge</i> <br> (success rate:  88%)</p>
                     </div>
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>CubeSort</i> <br> (success rate:  41%)</p>
                     </div>
                     <div class="video-item">
-                        <video autoplay muted loop preload="metadata">
-                            <source src="" type="video/mp4"> {/*Initially empty*/}
+                        <video autoplay muted loop>
+                            <source src="" type="video/mp4">
                         </video>
                         <p class="video-caption"><i>CoffeeMaking</i> <br> (success rate:  60%)</p>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <!-- Added mt-6 class here for more top margin -->
+        <h1 class="title is-4 mt-6">Same Initialization</h1>
+
+        <div class="video-grid-container similar-init-stacked">
+            <!-- KDPE Row -->
+            <div class="video-row" id="kdpe-row-similar">
+                <div class="row-header">
+                    <h2>KDPE</h2>
+                </div>
+                <div class="videos-wrapper" id="kdpe-videos-similar">
+                    <div class="video-item">
+                        <video autoplay muted loop>
+                            <source src="static/videos/kdpe/pp2_success.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop>
+                            <source src="static/videos/kdpe/pp3_success.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baseline Row -->
+            <div class="video-row" id="baseline-row-similar">
+                <div class="row-header">
+                    <h2>Baseline</h2>
+                </div>
+                <div class="videos-wrapper" id="baseline-videos-similar">
+                    <div class="video-item">
+                        <video autoplay muted loop>
+                            <source src="static/videos/baseline/pp2_failure.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-item">
+                        <video autoplay muted loop>
+                            <source src="static/videos/baseline/pp3_failure.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
             </div>
