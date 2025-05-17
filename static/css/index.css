@@ -230,6 +230,10 @@ body {
     color: #555;
 }
 
+.simulation-layout-stacked {
+  flex-direction: column;
+}
+
 /* Responsive adjustments */
 
 /* On larger screens, if you still want 4 videos per row *within* each column,
@@ -280,5 +284,15 @@ body {
     .video-filter {
         width: 100%;
         max-width: 200px; /* Or full width if preferred */
+    }
+}
+
+/* Specific layouts for Simulation Benchmark videos on larger screens */
+@media (min-width: 1201px) { /* This targets screens wider than 1200px */
+    .simulation-layout-stacked #kdpe-row .videos-wrapper {
+        grid-template-columns: repeat(4, 1fr); /* RoboMimic: 4 items in a single row */
+    }
+    .simulation-layout-stacked #baseline-row .videos-wrapper {
+        grid-template-columns: repeat(4, 1fr); /* MimicGen: 3 items occupy 3 of 4 cols, ensuring same item width */
     }
 }
